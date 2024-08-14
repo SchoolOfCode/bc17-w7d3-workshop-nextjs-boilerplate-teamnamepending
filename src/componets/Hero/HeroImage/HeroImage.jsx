@@ -6,6 +6,8 @@ const HeroImage = () => {
         src="/images/hero-desktop.png"
         alt="Cozy living room with a fireplace"
         className={styles.heroImage}
+        width="500px"
+        height="300px"
       />
     )
 }
