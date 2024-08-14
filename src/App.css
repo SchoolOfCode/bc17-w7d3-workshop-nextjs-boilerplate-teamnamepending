@@ -1,0 +1,29 @@
+html,
+body {
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  font-family: "Aleo", serif;
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+  #root {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
