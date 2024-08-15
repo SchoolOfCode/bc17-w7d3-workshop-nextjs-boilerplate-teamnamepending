@@ -1,0 +1,45 @@
+.heroSection {
+  padding: 20px;
+  text-align: center;
+}
+
+.reviewsContainer {
+  margin-top: 40px;
+  background-color: #96713a;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.countryButtons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.countryButton {
+  padding: 10px 20px;
+  border: 2px solid #ccc;
+  background-color: #472d0a;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.selectedCountry {
+  background-color: orange;
+  color: white;
+  border-color: orange;
+}
+
+.reviewDisplay {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.reviewContent p {
+  color: #555;
+  margin: 10px 0;
+}
