@@ -27,7 +27,7 @@ const Header = () => {
                 <a href="/" className={styles.menuLink}>Home</a>
               </li>
               <li className={styles.menuItem}>
-                <a href="/founders" className={styles.menuLink}>Founders</a>
+                <a href="/founder" className={styles.menuLink}>Founders</a>
               </li>
             </ul>
           </nav>

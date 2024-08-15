@@ -1,0 +1,41 @@
+.container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .introText {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .founderSection {
+    margin-top: 40px;
+  }
+  
+  .founderImage {
+    width: 400px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .founderInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .founderName {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .founderBio {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+    max-width: 600px;
+  }
+  
+  

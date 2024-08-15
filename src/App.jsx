@@ -3,6 +3,7 @@ import Footer from "./componets/Footer/Footer.jsx";
 import Header from "./componets/Header/Header.jsx";
 import Main from "./componets/Main/Main.jsx";
 
+
 function App() {
   return (
     <>
