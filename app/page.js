@@ -7,9 +7,7 @@ import Footer from "@/src/componets/Footer/Footer";
 export default function Home() {
   return (
     <>
-      <Header/>
       <Main/>
-      <Footer/>
-      </>
+    </>
   );
 }
