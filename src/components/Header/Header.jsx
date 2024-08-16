@@ -1,5 +1,5 @@
 "use client";
-import styles from './Header.module.css'
+import styles from './Header.module.css';
 import React, { useState } from 'react';
 
 const Header = () => {
@@ -21,10 +21,10 @@ const Header = () => {
       </div>
       {isMenuOpen && (
         <div className={styles.fullPageMenu}>
+          <span className={styles.closeIcon} onClick={toggleMenu}>
+            &#10005;
+          </span>
           <nav className={styles.nav}>
-          <span className={styles.menuIcon} onClick={toggleMenu}>
-          &#9776;
-        </span>
             <ul className={styles.menuList}>
               <li className={styles.menuItem}>
                 <a href="/" className={styles.menuLink}>Home</a>
