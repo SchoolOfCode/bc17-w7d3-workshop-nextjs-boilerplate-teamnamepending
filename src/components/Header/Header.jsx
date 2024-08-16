@@ -22,6 +22,9 @@ const Header = () => {
       {isMenuOpen && (
         <div className={styles.fullPageMenu}>
           <nav className={styles.nav}>
+          <span className={styles.menuIcon} onClick={toggleMenu}>
+          &#9776;
+        </span>
             <ul className={styles.menuList}>
               <li className={styles.menuItem}>
                 <a href="/" className={styles.menuLink}>Home</a>
