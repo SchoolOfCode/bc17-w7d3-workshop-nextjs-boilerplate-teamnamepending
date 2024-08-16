@@ -8,6 +8,7 @@ const Main = () => {
       <HeroSection />
       <Separator />
       <HowItWorksSection />
+      <stickyHeader />
     </main>
   );
 };

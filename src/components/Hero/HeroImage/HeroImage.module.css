@@ -9,5 +9,6 @@
     .heroImage {
       height: 500px;
       width: 550px;
+      border-radius: 10%;
     }
   }
