@@ -1,23 +1,68 @@
 .contactForm {
-    display: flex;
-    flex-direction: column; 
-    
-    align-items: center; 
-    
-    justify-content: center; 
-    
-    height: 100vh; 
-    
-    padding: 20px; 
+  max-width: 400px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
 }
+
+.contactForm fieldset {
+  border: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.contactForm legend {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
 .contactForm label {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-  }
-  
-  .contactForm label > input {
-    margin-top: 5px;
-  }
+  display: block;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #666;
+}
 
+.contactForm input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
 
+.contactForm input[type="text"]:focus {
+  outline: none;
+  border-color: #FF6600;
+  box-shadow: 0 0 5px rgba(255, 102, 0, 0.5);
+}
+
+/* Add a submit button style */
+.contactForm button[type="submit"] {
+  background-color: #FF6600;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+}
+
+.contactForm button[type="submit"]:hover {
+  background-color: #E65C00;
+}
+
+/* Error message style */
+.errorMessage {
+  color: #FF0000;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .contactForm {
+    padding: 0 15px;
+  }
+}
