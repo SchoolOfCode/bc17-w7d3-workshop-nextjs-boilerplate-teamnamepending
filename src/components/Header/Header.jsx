@@ -23,7 +23,7 @@ const Header = () => {
         <div className={styles.fullPageMenu}>
           <span className={styles.closeIcon} onClick={toggleMenu}>
             &#10005;
-          </span>
+          </span>-
           <nav className={styles.nav}>
             <ul className={styles.menuList}>
               <li className={styles.menuItem}>
