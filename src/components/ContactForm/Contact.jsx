@@ -22,11 +22,11 @@ export default function ContactForm() {
     }
     const [phoneNumber , setPhoneNumber ] = useState("")
     function handlePhoneNumber(event){
-    setCity(event.target.value)
+    setPhoneNumber(event.target.value)
     }
     const [email , setEmail ] = useState("")
     function handleEmail(event){
-    setCity(event.target.value)
+    setEmail(event.target.value)
     }
 
     return(    
