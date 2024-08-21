@@ -63,6 +63,9 @@ const Header = () => {
               <li className={styles.menuItem}>
                 <a href="/founder" className={styles.menuLink}>Founders</a>
               </li>
+              <li className={styles.menuItem}>
+                <a href="/DesignBooking" className={styles.menuLink}>Contact us</a>
+              </li>
             </ul>
           </nav>
         </div>
