@@ -1,14 +1,32 @@
 "use client";
 import styles from './Header.module.css';
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
+
+// Initial state for the reducer
+const initialState = {
+  isMenuOpen: false,
+};
+
+// Reducer function to handle state changes
+function reducer(state, action) {
+  switch (action.type) {
+    case 'TOGGLE_MENU':
+      return { ...state, isMenuOpen: !state.isMenuOpen };
+    default:
+      return state;
+  }
+}
 
 const Header = () => {
-  // State to manage the visibility of the full-page menu
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // Use the useReducer hook instead of useState
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  // Destructure state to get isMenuOpen
+  const { isMenuOpen } = state;
 
   // Function to toggle the menu
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    dispatch({ type: 'TOGGLE_MENU' });
   };
 
   return (
@@ -23,7 +41,7 @@ const Header = () => {
         <div className={styles.fullPageMenu}>
           <span className={styles.closeIcon} onClick={toggleMenu}>
             &#10005;
-          </span>-
+          </span>
           <nav className={styles.nav}>
             <ul className={styles.menuList}>
               <li className={styles.menuItem}>
@@ -41,3 +59,4 @@ const Header = () => {
 };
 
 export default Header;
+

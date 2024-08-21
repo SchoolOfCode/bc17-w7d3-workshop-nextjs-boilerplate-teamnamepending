@@ -1,66 +1,84 @@
 'use client';
-import React from 'react';
+import React, { useReducer } from 'react';
 import styles from '@/src/components/ContactForm/Contact.module.css';
-import { useState } from 'react';
 
-export default function ContactForm() { 
-    const [fullName , setFullName ] = useState("");
-    const [postcode , setPostcode ] = useState("");
-    const [address , setAddress ] = useState("");
-    const [city , setCity ] = useState("");
-    const [phoneNumber , setPhoneNumber ] = useState("");
-    const [email , setEmail ] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
+const initialState = {
+    fullName: '',
+    postcode: '',
+    address: '',
+    city: '',
+    phoneNumber: '',
+    email: '',
+    errorMessage: '',
+};
 
-    function handleFullnameChange(event){
-        setFullName(event.target.value);
+function reducer(state, action) {
+    switch (action.type) {
+        case 'UPDATE_FIELD':
+            return { ...state, [action.field]: action.value };
+        case 'SET_ERROR':
+            return { ...state, errorMessage: action.message };
+        case 'CLEAR_ERROR':
+            return { ...state, errorMessage: '' };
+        default:
+            return state;
     }
+}
 
-    function handlePostcode(event){
-        setPostcode(event.target.value);
-    }
+export default function ContactForm() {
+    const [state, dispatch] = useReducer(reducer, initialState);
 
-    function handleAddress(event){
-        setAddress(event.target.value);
-    }
+    const { fullName, postcode, address, city, phoneNumber, email, errorMessage } = state;
 
-    function handleCity(event){
-        setCity(event.target.value);
-    }
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        dispatch({ type: 'UPDATE_FIELD', field: name, value });
+    };
 
-    function handlePhoneNumber(event){
-        setPhoneNumber(event.target.value);
-    }
-
-    function handleEmail(event){
-        setEmail(event.target.value);
-    }
-
-    function handleSubmit(event){ 
+    const handleSubmit = (event) => {
         event.preventDefault();
-        if(!fullName || !postcode || !address || !city || !phoneNumber || !email){
-            setErrorMessage("Please fill all fields");
+        if (!fullName || !postcode || !address || !city || !phoneNumber || !email) {
+            dispatch({ type: 'SET_ERROR', message: 'Please fill all fields' });
             return;
         }
-        setErrorMessage("");
+        dispatch({ type: 'CLEAR_ERROR' });
         console.log("Form submitted with values:", fullName, postcode, address, city, phoneNumber, email);
-    }  
+    };
 
-    return(    
-        <form onSubmit={(event)=> handleSubmit(event)} className={styles.contactForm}>
+    return (
+        <form onSubmit={handleSubmit} className={styles.contactForm}>
             <fieldset>
                 <legend>Personal Information:</legend>
-                <label> Fullname <input type="text" onChange={(event)=> handleFullnameChange(event)} value={fullName}/></label>
-                <label> Postcode <input type="text" onChange={(event)=> handlePostcode(event)} value={postcode}/></label>
-                <label> House/Flat Number and Street Name <input type="text" onChange={(event)=> handleAddress(event)} value={address}/></label>
-                <label> City <input type="text" onChange={(event)=> handleCity(event)} value={city}/></label>
+                <label>
+                    Fullname
+                    <input type="text" name="fullName" onChange={handleChange} value={fullName} />
+                </label>
+                <label>
+                    Postcode
+                    <input type="text" name="postcode" onChange={handleChange} value={postcode} />
+                </label>
+                <label>
+                    House/Flat Number and Street Name
+                    <input type="text" name="address" onChange={handleChange} value={address} />
+                </label>
+                <label>
+                    City
+                    <input type="text" name="city" onChange={handleChange} value={city} />
+                </label>
             </fieldset>
             <fieldset>
-                <legend>Contact Information: </legend>
-                <label>Phone number <input type="text" onChange={(event)=> handlePhoneNumber(event)} value={phoneNumber}/> </label>
-                <label>Email address<input type="text" onChange={(event)=> handleEmail(event)} value={email}/> </label>
+                <legend>Contact Information:</legend>
+                <label>
+                    Phone number
+                    <input type="text" name="phoneNumber" onChange={handleChange} value={phoneNumber} />
+                </label>
+                <label>
+                    Email address
+                    <input type="text" name="email" onChange={handleChange} value={email} />
+                </label>
             </fieldset>
             {errorMessage && <p>{errorMessage}</p>}
-            <button type="submit">Submit</button>  
+            <button type="submit">Submit</button>
         </form>
-    )}
+    );
+}

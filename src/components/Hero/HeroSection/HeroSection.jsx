@@ -1,17 +1,38 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import HeroDescription from "../HeroDescription/HeroDescription";
 import HeroImage from "../HeroImage/HeroImage";
 import styles from "./HeroSection.module.css";
 
+// Initial state for the reducer
+const initialState = {
+  selectedCountry: null,
+  review: null,
+};
+
+// Reducer function to handle state changes
+function reducer(state, action) {
+  switch (action.type) {
+    case 'SELECT_COUNTRY':
+      return { ...state, selectedCountry: action.payload, review: null };
+    case 'SET_REVIEW':
+      return { ...state, review: action.payload };
+    case 'RESET_REVIEW':
+      return { ...state, review: null };
+    default:
+      return state;
+  }
+}
+
 export default function HeroSection() {
-  const [selectedCountry, setSelectedCountry] = useState(null); // State to track the selected country
-  const [review, setReview] = useState(null); // State to store fetched review data
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const { selectedCountry, review } = state;
 
   // Function to handle country button click
   const handleCountryClick = (country) => {
-    setSelectedCountry(country); // Update selectedCountry state
+    dispatch({ type: 'SELECT_COUNTRY', payload: country });
   };
 
   // useEffect to fetch review data when selectedCountry changes
@@ -19,11 +40,13 @@ export default function HeroSection() {
     if (selectedCountry) {
       // Fetch data from the API based on the selected country
       fetch(`https://seal-app-336e8.ondigitalocean.app/reviews?country=${selectedCountry}`)
-        .then((response) => response.json()) // Convert response to JSON
-        .then((data) => setReview(data)) // Store the review data in state
-        .catch((error) => console.error('Error fetching review:', error)); // Handle any errors
+        .then((response) => response.json())
+        .then((data) => dispatch({ type: 'SET_REVIEW', payload: data }))
+        .catch((error) => console.error('Error fetching review:', error));
+    } else {
+      dispatch({ type: 'RESET_REVIEW' });
     }
-  }, [selectedCountry]); // Dependency array includes selectedCountry, so useEffect runs when it changes
+  }, [selectedCountry]);
 
   return (
     <section className={styles.heroSection}>
@@ -62,5 +85,6 @@ export default function HeroSection() {
     </section>
   );
 }
+
 
 
