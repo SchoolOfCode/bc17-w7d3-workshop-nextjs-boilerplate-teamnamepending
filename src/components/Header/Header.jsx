@@ -1,36 +1,49 @@
-"use client";
+'use client';
+import React, { useReducer, useEffect } from 'react';
 import styles from './Header.module.css';
-import React, { useReducer } from 'react';
 
-// Initial state for the reducer
 const initialState = {
   isMenuOpen: false,
+  isSticky: false,
 };
 
-// Reducer function to handle state changes
 function reducer(state, action) {
   switch (action.type) {
     case 'TOGGLE_MENU':
       return { ...state, isMenuOpen: !state.isMenuOpen };
+    case 'TOGGLE_STICKY':
+      return { ...state, isSticky: action.payload };
     default:
       return state;
   }
 }
 
 const Header = () => {
-  // Use the useReducer hook instead of useState
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { isMenuOpen, isSticky } = state;
 
-  // Destructure state to get isMenuOpen
-  const { isMenuOpen } = state;
-
-  // Function to toggle the menu
   const toggleMenu = () => {
     dispatch({ type: 'TOGGLE_MENU' });
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const isTop = window.scrollY < 100; // Adjust the scroll threshold as needed
+      if (!isTop && !isSticky) {
+        dispatch({ type: 'TOGGLE_STICKY', payload: true });
+      } else if (isTop && isSticky) {
+        dispatch({ type: 'TOGGLE_STICKY', payload: false });
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isSticky]);
+
   return (
-    <header className={styles.headerContainer}>
+    <header className={`${styles.headerContainer} ${isSticky ? styles.sticky : ''}`}>
       <div className={styles.titleContainer}>
         <h1 className={styles.title}>🔥 Fireplace Palace</h1>
         <span className={styles.menuIcon} onClick={toggleMenu}>
@@ -59,4 +72,3 @@ const Header = () => {
 };
 
 export default Header;
-

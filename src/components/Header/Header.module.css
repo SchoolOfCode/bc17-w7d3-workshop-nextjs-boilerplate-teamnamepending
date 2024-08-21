@@ -1,6 +1,17 @@
 .headerContainer {
   padding-left: 10px;
   font-size: 16px;
+  background-color: rgb(0, 0, 0); /* Keep the header background white */
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: transform 0.3s ease-in-out; /* Smooth transition for hiding/showing */
+}
+
+.headerContainer.sticky {
+  transform: translateY(-100%); /* Slide the header out of view */
 }
 
 .title {
