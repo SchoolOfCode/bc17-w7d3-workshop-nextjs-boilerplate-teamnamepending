@@ -29,3 +29,41 @@
     margin-top: 10px;
   }
 }
+
+.consultationParagraph {
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.numberSpan {
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.numberSpan button {
+  background-color: #FF6600;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.numberSpan button:hover {
+  background-color: #FF3300;
+  transform: scale(1.05);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.numberSpan button:active {
+  transform: scale(1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
