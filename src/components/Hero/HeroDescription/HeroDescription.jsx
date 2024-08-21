@@ -9,7 +9,8 @@ const HeroDescription = () => {
           perfect fireplace ...
         </p>
         <p className={styles.consultationParagraph}>
-          Book consultation: <span className={styles.numberSpan}><button>Contact Us</button></span>
+          Book consultation: <span className={styles.numberSpan}>
+          <a href="http://localhost:3000/DesignBooking"><button>Contact Us</button></a></span>
         </p>
       </div>
     )
