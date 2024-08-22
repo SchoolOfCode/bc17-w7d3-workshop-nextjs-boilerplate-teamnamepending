@@ -1,7 +1,7 @@
 .headerContainer {
   padding-left: 10px;
   font-size: 16px;
-  background-color: rgb(0, 0, 0); /* Keep the header background white */
+  background-color: #f1911b; /* Keep the header background white */
   z-index: 1000;
   position: fixed;
   top: 0;
