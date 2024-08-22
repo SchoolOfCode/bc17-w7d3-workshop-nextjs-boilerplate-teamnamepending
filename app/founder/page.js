@@ -4,7 +4,7 @@ import styles from "./FounderPage.module.css";
 export default function FounderPage() {
   return (
     <div className={styles.container}>
-      <h1>Meet the Founders</h1>
+      <h1 className={styles.foundersHeader}>Meet the Founders</h1>
       <p className={styles.introText}>
         At Fireplace Palace, we are proud to introduce the visionaries who brought our company to life. Get to know our founders and learn how their passion and expertise have shaped our journey.
       </p>
