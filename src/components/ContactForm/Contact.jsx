@@ -45,7 +45,7 @@ export default function ContactForm() {
         dispatch({ type: 'UPDATE_FIELD', field: name, value });
 
         // Validation to check if a field is left empty and set an error immediately.
-        if (!value.trim()) {
+        if (value === '') {
             dispatch({ type: 'SET_ERROR', message: `Please fill the ${name} field.` });
         }
     };
@@ -54,14 +54,15 @@ export default function ContactForm() {
     const handleSubmit = (event) => {
         event.preventDefault(); // Prevents the default form submission behavior.
         dispatch({ type: 'FORM_SUBMITTING' });
+
+        // Check if any field is empty and set an error message if needed.
         if (!fullName || !postcode || !address || !city || !phoneNumber || !email) {
             dispatch({ type: 'SET_ERROR', message: 'Please fill all fields' });
             return;
         }
+
         // Simulate form processing delay.
         setTimeout(() => {
-            
-
             dispatch({ type: 'FORM_SUCCESS' });
             console.log("Form submitted with values:", fullName, postcode, address, city, phoneNumber, email);
         }, 5000);
@@ -134,5 +135,6 @@ export default function ContactForm() {
         </form>
     );
 }
+
 
 
