@@ -16,6 +16,7 @@
 
 .title {
   margin: 0;
+  font-family: fantasy;
 }
 
 @media (min-width: 1024px) {
