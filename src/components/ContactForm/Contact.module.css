@@ -1,5 +1,4 @@
 .contactForm {
-<<<<<<< Updated upstream
   max-width: 400px;
   margin:  auto;
   font-family: Arial, sans-serif;
@@ -17,34 +16,10 @@
   font-weight: bold;
   margin-bottom: 10px;
   color: #333;
-=======
-  font-family: Arial, sans-serif;
-  width: 100%;
-  max-width: 600px;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-}
-
-.contactForm fieldset {
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #fff;
-}
-
-.contactForm legend {
-  font-size: 1.2em;
-  font-weight: bold;
->>>>>>> Stashed changes
 }
 
 .contactForm label {
   display: block;
-<<<<<<< Updated upstream
   margin-bottom: 15px;
   font-size: 14px;
   color: #666;
@@ -57,22 +32,10 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
-=======
-  margin-bottom: 10px;
-}
-
-.contactForm input[type="text"] {
-  width: calc(100% - 20px);
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
->>>>>>> Stashed changes
 }
 
 .contactForm input[type="text"]:focus {
   outline: none;
-<<<<<<< Updated upstream
   border-color: #FF6600;
   box-shadow: 0 0 5px rgba(255, 102, 0, 0.5);
 }
@@ -114,8 +77,3 @@
     padding: 0 15px;
   }
 }
-=======
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
->>>>>>> Stashed changes

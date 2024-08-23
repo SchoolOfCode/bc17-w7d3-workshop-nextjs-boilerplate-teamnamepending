@@ -5,9 +5,8 @@ import HeroDescription from "../HeroDescription/HeroDescription";
 import HeroImage from "../HeroImage/HeroImage";
 import styles from "./HeroSection.module.css";
 
-// Replace with your Pantry basket ID
-const PANTRY_BASKET_ID = "newBasket"; 
-const PANTRY_URL = `https://getpantry.cloud/apiv1/pantry/9d4ff7f6-b7ae-4e28-a5b3-43432865d5fb/basket/${PANTRY_BASKET_ID}`;
+// Base URL for Pantry API
+const PANTRY_BASE_URL = 'https://getpantry.cloud/apiv1/pantry/9d4ff7f6-b7ae-4e28-a5b3-43432865d5fb/basket/';
 
 // Initial state for the reducer
 const initialState = {
@@ -48,8 +47,12 @@ export default function HeroSection() {
     if (selectedCountry) {
       console.log(`Fetching review for: ${selectedCountry}`); // Debugging message
 
+      // Construct the dynamic URL based on the selected country
+      const basketName = `${selectedCountry}Basket`; // e.g., "EnglandBasket"
+      const fetchUrl = `${PANTRY_BASE_URL}${basketName}`;
+
       // Fetch data from Pantry based on the selected country
-      fetch(PANTRY_URL)
+      fetch(fetchUrl)
         .then((response) => {
           if (!response.ok) {
             throw new Error(`Failed to fetch reviews from Pantry`);
@@ -59,8 +62,8 @@ export default function HeroSection() {
         .then((data) => {
           console.log("Fetched data from Pantry:", data); // Debugging message
           // Assuming data is a JSON object with review details
-          if (data && data.location === selectedCountry) {
-            dispatch({ type: 'SET_REVIEW', payload: data });
+          if (data && data.reviews && data.reviews.length > 0) {
+            dispatch({ type: 'SET_REVIEW', payload: data.reviews[0] }); // Set the first review for simplicity
           } else {
             dispatch({ type: 'SET_ERROR', payload: `No reviews available for ${selectedCountry}.` });
           }
