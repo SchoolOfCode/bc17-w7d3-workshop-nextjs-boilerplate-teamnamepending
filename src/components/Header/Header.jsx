@@ -28,7 +28,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const isTop = window.scrollY < 100; // Adjust the scroll threshold as needed
+      const isTop = window.scrollY < 100; 
       if (!isTop && !isSticky) {
         dispatch({ type: 'TOGGLE_STICKY', payload: true });
       } else if (isTop && isSticky) {
