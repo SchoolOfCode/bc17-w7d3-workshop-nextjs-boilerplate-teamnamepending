@@ -62,6 +62,14 @@
   font-size: 14px;
   margin-top: 10px;
 }
+.invalid {
+  border: 1px solid red;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+}
 
 /* Responsive design */
 @media (max-width: 480px) {
