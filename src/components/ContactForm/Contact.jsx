@@ -13,6 +13,7 @@ const initialState = {
     email: '',           
     errorMessage: '',   
     status: 'editing',   
+    isPostcodeValid: null, // Track postcode validation status.
 };
 
 // Reducer function to handle state changes based on dispatched actions.
@@ -28,6 +29,9 @@ function reducer(state, action) {
             return { ...state, status: 'formSubmitting' };
         case 'FORM_SUCCESS':
             return { ...state, status: 'success' };
+        case 'POSTCODE_VALIDATION':
+            // Updates the validation status for the postcode.
+            return { ...state, isPostcodeValid: action.isValid, errorMessage: action.isValid ? '' : 'Invalid postcode' };
         default:
             return state;
     }
@@ -37,16 +41,27 @@ function reducer(state, action) {
 export default function ContactForm() {
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const { fullName, postcode, address, city, phoneNumber, email, errorMessage } = state;
+    const { fullName, postcode, address, city, phoneNumber, email, errorMessage, isPostcodeValid } = state;
 
     // Event handler for input changes to update the corresponding field in the state.
-    const handleChange = (event) => {
+    const handleChange = async (event) => {
         const { name, value } = event.target;
         dispatch({ type: 'UPDATE_FIELD', field: name, value });
 
-        // Validation to check if a field is left empty and set an error immediately.
-        if (value === '') {
-            dispatch({ type: 'SET_ERROR', message: `Please fill the ${name} field.` });
+        // Validate the postcode if the user is typing in the postcode field.
+        if (name === 'postcode' && value.length > 0) {
+            try {
+                // Call the postcode validation API using fetch.
+                const response = await fetch(`https://api.postcodes.io/postcodes/${value}/validate`);
+                const data = await response.json();
+                const isValid = data.result;
+
+                // Dispatch the result to update the validation status.
+                dispatch({ type: 'POSTCODE_VALIDATION', isValid });
+            } catch (error) {
+                // If there’s an API error, assume the postcode is invalid.
+                dispatch({ type: 'POSTCODE_VALIDATION', isValid: false });
+            }
         }
     };
 
@@ -55,9 +70,9 @@ export default function ContactForm() {
         event.preventDefault(); // Prevents the default form submission behavior.
         dispatch({ type: 'FORM_SUBMITTING' });
 
-        // Check if any field is empty and set an error message if needed.
-        if (!fullName || !postcode || !address || !city || !phoneNumber || !email) {
-            dispatch({ type: 'SET_ERROR', message: 'Please fill all fields' });
+        // Check if any field is empty or if the postcode is invalid.
+        if (!fullName || !postcode || !address || !city || !phoneNumber || !email || !isPostcodeValid) {
+            dispatch({ type: 'SET_ERROR', message: 'Please fill all fields correctly.' });
             return;
         }
 
@@ -88,7 +103,10 @@ export default function ContactForm() {
                         name="postcode"
                         onChange={handleChange}
                         value={postcode}
+                        className={isPostcodeValid === false ? styles.invalid : ''}
                     />
+                 
+                    {isPostcodeValid === false && <p className={styles.error}>Invalid postcode. Please enter a valid one.</p>}
                 </label>
                 <label>
                     House/Flat Number and Street Name
@@ -130,11 +148,12 @@ export default function ContactForm() {
                     />
                 </label>
             </fieldset>
-            {errorMessage && <p>{errorMessage}</p>}
+            {errorMessage && <p className={styles.error}>{errorMessage}</p>}
             <button type="submit">Request Design Consultation</button>
         </form>
     );
 }
+
 
 
 
